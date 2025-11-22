@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Estoque de Sorvetes</title>
+  <link rel="stylesheet" href="Estoque.css" />
+</head>
+<body>
+  <h1>Estoque de Sorvetes</h1>
+  <table id="estoque-table">
+    <thead>
+      <tr>
+        <th>Tipo de Sorvete</th>
+        <th>Quantidade de Entrada</th>
+        <th>Quantidade de Saída</th>
+        <th>Quantidade Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Dados do estoque serão inseridos aqui -->
+    </tbody>
+  </table>
+
+  <div id="low-stock-notification" style="display:none; color: red; font-weight: bold; margin-top: 10px;">
+    Atenção: Estoque baixo para um ou mais tipos de sorvete!
+  </div>
+
+  <script>
+    async function fetchEstoque() {
+      try {
+        const response = await fetch('http://localhost:3001/api/estoque');
+        if (!response.ok) {
+          throw new Error('Erro ao buscar dados do estoque');
+        }
+        const estoqueData = await response.json();
+        const tbody = document.querySelector('#estoque-table tbody');
+        const notification = document.getElementById('low-stock-notification');
+        tbody.innerHTML = '';
+        let lowStockFound = false;
+        estoqueData.forEach(item => {
+          const tr = document.createElement('tr');
+          if (item.Quantidade_Total <= 10) {
+            tr.classList.add('low-stock');
+            lowStockFound = true;
+          }
+          tr.innerHTML = `
+            <td>${item.Tipo_Sorvete}</td>
+            <td>${item.Quantidade_Entrada}</td>
+            <td>${item.Quantidade_Saida}</td>
+            <td>${item.Quantidade_Total}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+        if (lowStockFound) {
+          notification.style.display = 'block';
+        } else {
+          notification.style.display = 'none';
+        }
+      } catch (error) {
+        console.error(error);
+        alert('Falha ao carregar dados do estoque.');
+      }
+    }
+
+    window.onload = () => {
+      fetchEstoque();
+      setInterval(fetchEstoque, 5000); // Refresh every 5 seconds
+    };
+  </script>
+</body>
+</html>

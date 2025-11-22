@@ -1,0 +1,15 @@
+{
+  "name": "mcdonalds-project",
+  "version": "1.0.0",
+  "description": "Sorveteria backend and frontend project",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "init-estoque-db": "node backend/init_estoque_db.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "sqlite3": "^5.1.7"
+  }
+}

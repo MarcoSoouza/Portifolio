@@ -1,0 +1,17 @@
+{
+  "name": "marco-souza-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio website for Marco Souza",
+  "main": "index.html",
+  "scripts": {
+    "build": "if [ -d dist ]; then rm -rf dist; fi && mkdir dist && cp *.html *.css *.js dist/ && cp -r imag dist/ && cp -r Projeto dist/",
+    "start": "npx serve .",
+    "dev": "npx serve . -p 3000"
+  },
+  "keywords": ["portfolio", "web-development", "html", "css", "javascript"],
+  "author": "Marco Souza",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

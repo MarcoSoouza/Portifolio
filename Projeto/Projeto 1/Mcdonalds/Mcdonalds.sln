@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySqlConsoleApp", "MySqlConsoleApp\MySqlConsoleApp.csproj", "{CEA34E5C-FFA8-DE8C-E81E-FF22BBE43BC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEA34E5C-FFA8-DE8C-E81E-FF22BBE43BC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEA34E5C-FFA8-DE8C-E81E-FF22BBE43BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEA34E5C-FFA8-DE8C-E81E-FF22BBE43BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEA34E5C-FFA8-DE8C-E81E-FF22BBE43BC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4A00DB1-EE3A-4104-96F3-D82EC959D4FD}
+	EndGlobalSection
+EndGlobal

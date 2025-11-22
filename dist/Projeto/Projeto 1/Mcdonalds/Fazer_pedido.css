@@ -1,0 +1,62 @@
+/* Light Theme Styles */
+body {
+    background-color: #ffffff; /* Light background */
+    color: #000000; /* Dark text color */
+}
+
+a {
+    color: #007bff; /* Blue for links */
+}
+
+button {
+    background-color: #4CAF50; /* Green for buttons */
+    color: #ffffff; /* White text color for buttons */
+}
+
+input, textarea {
+    background-color: #f8f9fa; /* Light input fields */
+    color: #000000; /* Dark text color for input fields */
+    border: 1px solid #007bff; /* Blue border */
+}
+
+#orderCard {
+    background-color: #f0f0f0; /* Light background for the order card */
+    padding: 20px; /* Add some padding for better spacing */
+    border-radius: 5px; /* Rounded corners for aesthetics */
+}
+
+#orderCard h3, #orderCard p {
+    color: #000000; /* Set text color to black for order details */
+    font-size: 20px; /* Increased font size for better readability */
+}
+
+/* Flavor button styles */
+.flavor-button {
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.flavor-chocolate {
+    background-color: #7B3F00; /* Brown */
+}
+
+.flavor-morango {
+    background-color: #E63946; /* Red */
+}
+
+.flavor-pistache {
+    background-color: #4CAF50; /* Green */
+}
+
+.flavor-uva {
+    background-color: #6A0DAD; /* Purple */
+}
+
+.flavor-button:hover {
+    filter: brightness(85%);
+}

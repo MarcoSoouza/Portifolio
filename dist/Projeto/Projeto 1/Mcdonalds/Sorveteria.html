@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Sorveteria.css">
+    <title>Sorveteria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('image/Tela fundo 2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        nav {
+            text-align: center;
+            padding: 10px 0;
+            background-color: rgba(14, 0, 0, 0.952);
+        }
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .ice-cream-images img {
+            margin: 0 10px;
+            max-height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul style="list-style: none; padding: 0; margin: 0; display: inline-flex; gap: 20px;">
+            <li><button onclick="window.location.href='#home'" style="font-size: 16px; padding: 6px 12px; cursor: pointer; background-color: #0077cc; color: white; border: none; border-radius: 4px;">Home</button></li>
+            <li><button onclick="window.location.href='sobre.html'" style="font-size: 16px; padding: 6px 12px; cursor: pointer; background-color: #0077cc; color: white; border: none; border-radius: 4px;">Sobre</button></li>
+            <li><button onclick="window.location.href='Contato.html'" style="font-size: 16px; padding: 6px 12px; cursor: pointer; background-color: #0077cc; color: white; border: none; border-radius: 4px;">Contato</button></li>
+            <li><button id="fazerPedidoBtn" style="font-size: 16px; padding: 6px 12px; cursor: pointer; background-color: #0077cc; color: white; border: none; border-radius: 4px;">Fazer Pedido</button></li>
+            <li><button id="produtoBtn" style="font-size: 16px; padding: 6px 12px; cursor: pointer; background-color: #0077cc; color: white; border: none; border-radius: 4px;">Produto</button></li>
+            <li><button id="estoqueBtn" style="font-size: 16px; padding: 6px 12px; cursor: pointer; background-color: #0077cc; color: white; border: none; border-radius: 4px;">Estoque</button></li>
+        </ul>
+        <button onclick="window.location.href='Register.html'" style="margin-left: 20px; font-size: 16px; padding: 6px 12px; cursor: pointer; background-color: #0077cc; color: white; border: none; border-radius: 4px;">Registrar</button>
+    </nav>
+    <main>
+        <section id="home">
+            <h1>Bem-vindo à nossa Sorveteria!</h1>
+            <p>Delicie-se com nossos sabores incríveis!</p>
+            <div class="ice-cream-images">
+                <img src="image/Cópia de Sabor-chocolate-modelo01.png" alt="Sabor Chocolate">
+                <img src="image/Cópia de Sabor-morango-modelo01.png" alt="Sabor Morango">
+                <img src="image/Cópia de Sabor-mirtilo-modelo01.jpg" alt="Sabor Mirtilo">
+                <img src="image/Cópia de Sabor-pistache-modelo01.png" alt="Sabor Pistache">
+            </div>
+        </section>
+        <section id="about">
+            <h2>Sobre Nós</h2>
+            <p>Somos uma sorveteria dedicada a oferecer os melhores sabores de sorvete, feitos com ingredientes frescos e de alta qualidade. Nossa missão é proporcionar momentos de alegria e satisfação a cada colherada.</p>
+        </section>
+    </main>
+    <script>
+        const password = '5522';
+
+        function promptPasswordAndRedirect(page) {
+            const userInput = prompt('Por favor, insira a senha para acessar esta página:');
+            if (userInput === password) {
+                window.location.href = page;
+            } else {
+                alert('Senha incorreta. Acesso negado.');
+            }
+        }
+
+        document.getElementById('estoqueBtn').addEventListener('click', () => {
+            promptPasswordAndRedirect('Estoque.html');
+        });
+
+        document.getElementById('produtoBtn').addEventListener('click', () => {
+            promptPasswordAndRedirect('Pedidos.html');
+        });
+
+        document.getElementById('fazerPedidoBtn').addEventListener('click', () => {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn === 'true') {
+                window.location.href = 'Fazer_Pedido.html';
+            } else {
+                alert('Você precisa estar logado para fazer um pedido.');
+                window.location.href = 'Login.html';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fazer Pedido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('image/Tela\ fundo\ 2.jpg');
+            background-color: #f8f8f8;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .flavor-options {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .flavor-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            width: 100px;
+        }
+        .flavor-option input[type="checkbox"] {
+            margin-bottom: 5px;
+        }
+        .flavor-label {
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            user-select: none;
+            text-align: center;
+            width: 100%;
+        }
+        .quantity-input {
+            width: 50px;
+            margin-top: 5px;
+            padding: 4px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            text-align: center;
+        }
+        .morango { background-color: #e91e63; }
+        .uva { background-color: #673ab7; }
+        .pistache { background-color: #4caf50; }
+        .chocolate { background-color: #795548; }
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+        #numero_pedido_display {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #333;
+            text-align: center;
+        }
+        #whatsapp-link {
+            display: block;
+            margin: 15px auto 0 auto;
+            max-width: 600px;
+            text-align: center;
+        }
+        #whatsapp-link a {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #whatsapp-link a:hover {
+            background-color: #1ebe57;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fazer Pedido</h1>
+    <form id="pedido-form">
+        <label for="nome_cliente">Nome do Cliente</label>
+        <input type="text" id="nome_cliente" name="nome_cliente" required />
+
+        <label for="endereco">Endereço</label>
+        <input type="text" id="endereco" name="endereco" required />
+
+        <!-- Número do Pedido removed for auto-generation -->
+
+        <label for="tamanho">Tamanho</label>
+        <select id="tamanho" name="tamanho" required>
+            <option value="">Selecione o tamanho</option>
+            <option value="Pequeno">Pequeno</option>
+            <option value="Médio">Médio</option>
+            <option value="Grande">Grande</option>
+        </select>
+
+        <label>Sabor</label>
+        <div class="flavor-options">
+            <label class="flavor-option">
+                <input type="checkbox" name="sabor" value="Morango" />
+                <span class="flavor-label morango">Morango</span>
+                <input type="number" name="quantidade_morango" class="quantity-input" min="1" value="1" />
+            </label>
+            <label class="flavor-option">
+                <input type="checkbox" name="sabor" value="Uva" />
+                <span class="flavor-label uva">Uva</span>
+                <input type="number" name="quantidade_uva" class="quantity-input" min="1" value="1" />
+            </label>
+            <label class="flavor-option">
+                <input type="checkbox" name="sabor" value="Pistache" />
+                <span class="flavor-label pistache">Pistache</span>
+                <input type="number" name="quantidade_pistache" class="quantity-input" min="1" value="1" />
+            </label>
+            <label class="flavor-option">
+                <input type="checkbox" name="sabor" value="Chocolate" />
+                <span class="flavor-label chocolate">Chocolate</span>
+                <input type="number" name="quantidade_chocolate" class="quantity-input" min="1" value="1" />
+            </label>
+        </div>
+
+        <button type="submit">Enviar Pedido</button>
+        <div class="message" id="message"></div>
+    </form>
+
+    <div id="whatsapp-link" style="display:none;">
+        <a href="#" target="_blank" id="whatsapp-send">Enviar pedido pelo WhatsApp</a>
+    </div>
+
+    <script>
+        const WHATSAPP_NUMBER = '5511948207174'; // WhatsApp number configurable here
+
+        function generateRandomOrderNumber() {
+            // Generate a random numeric order number of length 12
+            let orderNumber = '';
+            for (let i = 0; i < 12; i++) {
+                orderNumber += Math.floor(Math.random() * 10).toString();
+            }
+            return orderNumber;
+        }
+
+        function createWhatsAppMessage(pedidoData, saboresMap) {
+            let message = `*Pedido Número:* ${pedidoData.numero_pedido}\n`;
+            message += `*Nome do Cliente:* ${pedidoData.nome_cliente}\n`;
+            message += `*Endereço:* ${pedidoData.endereco}\n`;
+            message += `*Tamanho:* ${pedidoData.tamanho}\n`;
+            message += `*Itens:*\n`;
+            pedidoData.itens.forEach(item => {
+                const saborNome = saboresMap[item.sabor_id] || 'Desconhecido';
+                message += `- ${saborNome}: ${item.quantidade}\n`;
+            });
+            message += `*Preço Total:* R$ ${pedidoData.preco_total}\n`;
+            message += `*Taxa de Entrega:* R$ 5.00\n`; // Assuming fixed delivery fee
+            return encodeURIComponent(message);
+        }
+
+        document.getElementById('pedido-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const nome_cliente = document.getElementById('nome_cliente').value.trim();
+            const endereco = document.getElementById('endereco').value.trim();
+            let numero_pedido = generateRandomOrderNumber();
+            const tamanho = document.getElementById('tamanho').value;
+            const saboresChecked = Array.from(document.querySelectorAll('input[name="sabor"]:checked')).map(cb => cb.value);
+
+            if (!nome_cliente || !endereco || !tamanho || saboresChecked.length === 0) {
+                document.getElementById('message').textContent = 'Por favor, preencha todos os campos e selecione pelo menos um sabor.';
+                return;
+            }
+
+            // Prepare the order data
+            const pedidoData = {
+                numero_pedido,
+                nome_cliente,
+                endereco,
+                prazo_entrega: 'Imediato',
+                preco_total: 0,
+                tamanho,
+                itens: [],
+                delivery_fee: 5.00
+            };
+
+            try {
+                // Fetch sabores from backend to map names to ids and prices
+                const responseSabores = await fetch('http://localhost:3001/api/sabores');
+                const sabores = await responseSabores.json();
+
+                // Create a map from sabor id to sabor name for WhatsApp message
+                const saboresMap = {};
+                // Create a map from sabor id to price for total price calculation
+                const saboresPriceMap = {};
+                sabores.forEach(s => {
+                    saboresMap[s.id] = s.nome_sabor;
+                    saboresPriceMap[s.id] = parseFloat(s.preco);
+                });
+
+                let totalPrice = 0;
+                saboresChecked.forEach(saborName => {
+                    const saborObj = sabores.find(s => s.nome_sabor === saborName);
+                    if (saborObj) {
+                        // Get quantity input value for this flavor
+                        const quantityInput = document.querySelector(`input[name="quantidade_${saborName.toLowerCase()}"]`);
+                        let quantidade = 1;
+                        if (quantityInput) {
+                            quantidade = parseInt(quantityInput.value);
+                            if (isNaN(quantidade) || quantidade < 1) {
+                                quantidade = 1;
+                            }
+                        }
+                        pedidoData.itens.push({
+                            sabor_id: saborObj.id,
+                            quantidade
+                        });
+                        totalPrice += saboresPriceMap[saborObj.id] * quantidade;
+                    }
+                });
+
+                const deliveryFee = 5.00;
+                pedidoData.preco_total = (totalPrice + deliveryFee).toFixed(2);
+                pedidoData.delivery_fee = deliveryFee;
+
+                if (pedidoData.itens.length === 0) {
+                    document.getElementById('message').textContent = 'Sabor(es) selecionado(s) inválido(s).';
+                    return;
+                }
+
+                // Send order to backend
+                const response = await fetch('http://localhost:3001/api/pedidos', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(pedidoData)
+                });
+
+                if (response.ok) {
+                    document.getElementById('message').textContent = 'Pedido enviado com sucesso! Número do pedido: ' + numero_pedido;
+
+                    // Create WhatsApp message link and open WhatsApp chat immediately
+                    const whatsappMessage = createWhatsAppMessage(pedidoData, saboresMap);
+                    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+
+                    // Redirect immediately to WhatsApp chat
+                    window.location.href = whatsappUrl;
+
+                    this.reset();
+                } else {
+                    const errorData = await response.json();
+                    document.getElementById('message').textContent = 'Erro ao enviar pedido: ' + (errorData.error || 'Desconhecido');
+                }
+            } catch (error) {
+                document.getElementById('message').textContent = 'Erro ao enviar pedido.';
+            }
+        });
+    </script>
+</body>
+</html>

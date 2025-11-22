@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registrar Conta - Sorveteria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('../Mcdonalds/image/Fundo23.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .register-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 320px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #0077cc;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0077cc;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .login-link a {
+            color: #0077cc;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Criar Conta</h2>
+        <form id="registerForm" action="#" method="POST" onsubmit="return validateForm()">
+            <div class="error-message" id="errorMessage"></div>
+            <label for="username">Usuário</label>
+            <input type="text" id="username" name="username" placeholder="Digite seu usuário" required />
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Digite seu email" required />
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" placeholder="Digite sua senha" required />
+            <label for="confirmPassword">Confirmar Senha</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirme sua senha" required />
+            <button type="submit">Registrar</button>
+        </form>
+        <div class="login-link">
+            <p>Já tem uma conta? <a href="Login.html">Faça login aqui</a></p>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const confirmPassword = document.getElementById('confirmPassword').value.trim();
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (!username || !email || !password || !confirmPassword) {
+                errorMessage.textContent = 'Por favor, preencha todos os campos.';
+                errorMessage.style.display = 'block';
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                errorMessage.textContent = 'As senhas não coincidem.';
+                errorMessage.style.display = 'block';
+                return false;
+            }
+
+            // Here you can add further validation or submit the form via AJAX
+
+            errorMessage.style.display = 'none';
+            alert('Conta criada com sucesso (simulação).');
+            // Set login flag in localStorage
+            localStorage.setItem('loggedIn', 'true');
+            // Redirect to Login.html after registration
+            window.location.href = 'Login.html';
+            return false; // prevent actual form submission for demo
+        }
+    </script>
+</body>
+</html>

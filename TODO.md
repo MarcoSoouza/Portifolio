@@ -1,0 +1,3 @@
+- [x] Increase profile photo size to 80x80px in index.css
+- [x] Increase name font size to 2rem in index.css
+- [x] Increase tagline font size to 1.1rem in index.css

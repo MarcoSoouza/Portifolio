@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pedidos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('image/Tela\ fundo\ 2.jpg');
+            margin: 20px;
+            background-color: #f8f8f8;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e9f5e9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Pedidos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome do Cliente</th>
+                <th>Endereço</th>
+                <th>Número do Pedido</th>
+                <th>Tamanho</th>
+                <th>Sabor</th>
+                <th>Valor Total</th>
+            </tr>
+        </thead>
+        <tbody id="pedidos-tbody">
+            <!-- Dynamic rows will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchPedidos() {
+            try {
+                const response = await fetch('http://localhost:3001/api/pedidos');
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar pedidos');
+                }
+                const pedidos = await response.json();
+                const tbody = document.getElementById('pedidos-tbody');
+                tbody.innerHTML = '';
+
+                pedidos.forEach(pedido => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${pedido.id}</td>
+                        <td>${pedido.nome_cliente}</td>
+                        <td>${pedido.endereco}</td>
+                        <td>${pedido.numero_pedido}</td>
+                        <td>${pedido.tamanho}</td>
+                        <td>${pedido.sabor}</td>
+                        <td>R$ ${pedido.preco_total.toFixed(2)}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (error) {
+                console.error(error);
+                const tbody = document.getElementById('pedidos-tbody');
+                tbody.innerHTML = '<tr><td colspan="7">Erro ao carregar os pedidos.</td></tr>';
+            }
+        }
+
+        // Fetch pedidos on page load
+        window.onload = fetchPedidos;
+    </script>
+</body>
+</html>
