@@ -4,7 +4,7 @@
   "description": "Portfolio website for Marco Souza",
   "main": "index.html",
   "scripts": {
-    "build": "if [ -d dist ]; then rm -rf dist; fi && mkdir dist && cp *.html *.css *.js dist/ && cp -r imag dist/ && cp -r Projeto dist/",
+    "build": "if [ -d dist ]; then rm -rf dist; fi && mkdir dist && cp *.html dist/ && cp -r imag dist/ && cp -r Projeto dist/",
     "start": "npx serve .",
     "dev": "npx serve . -p 3000"
   },
