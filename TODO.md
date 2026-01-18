@@ -1,2 +1,3 @@
 - [x] Change the href in Projeto.html for Projeto 2's "Ver Demo" link from "https://your-vercel-app-url-for-projeto2.vercel.app" to "http://192.168.0.105:3000/"
-- [ ] Commit and push changes to GitHub to update the site via GitHub Pages
+- [x] Commit and push changes to GitHub to update the site via GitHub Pages
+- [ ] Make Projeto 2 image clickable to open http://192.168.0.105:3000/ in a new tab
