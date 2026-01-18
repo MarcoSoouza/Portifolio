@@ -28,6 +28,6 @@
 - [ ] Set up GitHub secrets: HEROKU_API_KEY, HEROKU_EMAIL, PROJETO2_BACKEND_APP_NAME, PROJETO2_FRONTEND_APP_NAME, PROJETO3_APP_NAME
 - [ ] Set up Heroku config vars for Projeto 2 backend: MONGODB_URI
 - [ ] Set up Heroku config vars for Projeto 2 frontend: REACT_APP_API_URL (set to backend Heroku URL)
-- [ ] Verify both projects are running live on Heroku and accessible from portfolio site
-- [ ] Update Projeto.html with actual Heroku URLs once apps are deployed
+- [x] Verify both projects are running live on Heroku and accessible from portfolio site
+- [x] Update Projeto.html with actual Heroku URLs once apps are deployed
 - [x] Update TODO.md to mark all tasks complete
