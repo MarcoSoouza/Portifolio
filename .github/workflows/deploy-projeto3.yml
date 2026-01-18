@@ -1,0 +1,23 @@
+name: Deploy Projeto 3 to Heroku
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Projetos/Projeto 3/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.PROJETO3_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          appdir: "Projetos/Projeto 3"
