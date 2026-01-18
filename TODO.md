@@ -1,3 +1,20 @@
-- [x] Change the href in Projeto.html for Projeto 2's "Ver Demo" link from "https://your-vercel-app-url-for-projeto2.vercel.app" to "http://192.168.0.105:3000/"
-- [x] Commit and push changes to GitHub to update the site via GitHub Pages
-- [x] Make Projeto 2 image clickable to open http://192.168.0.105:3000/ in a new tab
+# TODO: Deploy Projects 2 and 3
+
+## Project 2: Task Management Web App
+- [ ] Deploy backend to Heroku
+- [ ] Deploy frontend to GitHub Pages
+- [ ] Update frontend to use deployed backend URL
+- [ ] Test deployed application
+
+## Project 3: Flask Dashboard
+- [ ] Deploy to Heroku
+- [ ] Test deployed application
+
+## Main Site Updates
+- [ ] Update Projeto.html to link to deployed Project 2 and 3
+- [ ] Commit and push changes to GitHub
+- [ ] Ensure GitHub Pages deployment works
+
+## General
+- [ ] Verify all deployments are running
+- [ ] Update README if needed
